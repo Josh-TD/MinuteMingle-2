@@ -10,7 +10,7 @@ export default function Navbar() {
       <div className="flex justify-center items-center p-4">
         <h1 className="text-black text-4xl">
           <span className="flex inline-flex items-center">
-            <a href="/">
+            <a href="/home">
               <Home size={30} color="#881c1c" />
             </a>{" "}
             <i>MinuteMingle</i>
