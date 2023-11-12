@@ -116,9 +116,6 @@ export default function Home({
               Courses: {person && person.academicInfo.classes}
             </p>
           </div>
-          <div className = "absolute top-[25px] left-12">
-            <FilterDropdown />
-          </div>
           <div className="flex mb-4 justify-center">
             <a
               href="#"
