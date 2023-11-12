@@ -4,24 +4,26 @@ import RightArrow from '../src/components/Icons/RightArrow';
 
 export default function Home() {
   return (
-    <main className="flex bg-gray-100 min-h-screen items-center flex-col p-24">
-      <div className="z-10 w-full  justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 text-lg top-0 flex w-full justify-center pb-6 pt-8 lg:static lg:w-auto  lg:rounded-xl lg:p-4">
-          Make Friends&nbsp;
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center lg:static lg:h-auto lg:w-auto lg:bg-none">
+    <div className="relative w-full h-full">
+    <div className="absolute top-1/2 right-36">
+      <RightArrow />
+    </div>
+    <div className="bg-gray-200">
+      <div className="mx-auto mt-10 w-1/2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <a>
+            <img className="rounded-t-lg" src="/images/happy_guy.jpg" alt="" />
+        </a>
+        <div className="p-5">
+            <a href="#">
+              {/* HAVE TO REPLACE WITH THE ACTUAL PERSON'S NAME */}
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Jeremy, 22</h5>
+            </a>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Major(s):</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Minor(s):</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Courses:</p>
         </div>
       </div>
-
-      <div className = "flex justify-center relative w-full h-screen"> 
-        <div className="flex justify-center items-center">
-          <ProfileBox/>
-        </div>
-        <div className="absolute top-1/2 right-24">
-          <RightArrow/>
-        </div>
-      </div>
-
-    </main>
+    </div>
+  </div>
   );
 }

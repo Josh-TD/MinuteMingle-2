@@ -34,27 +34,5 @@ export const getServerSideProps: GetServerSideProps<
 export default function Home({
   isConnected,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return (
-    <div className="relative w-full h-full">
-      <div className="absolute top-1/2 right-36">
-        <RightArrow />
-      </div>
-      <div className="bg-gray-200">
-        <div className="mx-auto mt-10 w-1/2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <a>
-              <img className="rounded-t-lg" src="/images/happy_guy.jpg" alt="" />
-          </a>
-          <div className="p-5">
-              <a href="#">
-                {/* HAVE TO REPLACE WITH THE ACTUAL PERSON'S NAME */}
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Jeremy, 22</h5>
-              </a>
-              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Major(s):</p>
-              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Minor(s):</p>
-              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Courses:</p>
-          </div>
-        </div>
-      </div>
-    </div>
-);
+  
 }
