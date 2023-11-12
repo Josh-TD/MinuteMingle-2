@@ -46,8 +46,6 @@ export default function Home({
   const [picture, setPicture] = useState<string>("/images/happy_guy.jpg");
   const { user, error, isLoading } = useUser();
 
-  console.log(user)
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -69,7 +67,7 @@ export default function Home({
     fetch("http://localhost:3000/api/addMatch", {
       method: "POST",
       body: JSON.stringify({
-        sender: "jocelynbot",
+        sender: user?.email,
         receiver:person.contactInfo.email,
         senderInfo:"stuff",
         receiverInfo:"stuff"
