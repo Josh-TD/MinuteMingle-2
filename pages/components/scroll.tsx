@@ -1,7 +1,7 @@
 import React from "react";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 
-export default function ScrollAreaItem({ classes }: { classes: string[] }) {
+export default function ScrollAreaItem({ classes }: { classes: string }) {
   return (
     <ScrollArea.Root className="w-[200px] h-[225px] rounded overflow-hidden shadow-[0_2px_10px] shadow-lg shadow-black bg-gray-100">
       <ScrollArea.Viewport className="w-full h-full rounded">
@@ -9,7 +9,7 @@ export default function ScrollAreaItem({ classes }: { classes: string[] }) {
           <div className="text-black text-[15px] leading-[18px] font-medium">
             Classes
           </div>
-          {classes.map((c) => (
+          {classes && classes.split(',').map((c) => (
             <div
               className="text-black text-[13px] leading-[18px] mt-2.5 pt-2.5 border-t border-t-mauve6"
               key={c}

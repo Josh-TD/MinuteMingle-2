@@ -17,7 +17,7 @@ export default function AcademicInformation({
   paths,
   majors,
 }: {
-  paths: string[];
+  paths: string;
   majors: boolean;
 }) {
   const [shuffled, setShuffled] = useState<JSX.Element[]>([]);
@@ -55,7 +55,7 @@ export default function AcademicInformation({
         </h2>
       </div>
       <div className="flex flex-col">
-        {paths.map((path, i) => (
+        {paths && paths.split(',').map((path, i) => (
           <div className="flex flex-row inline-flex">
             {shuffled[i % numClassIcons]}
             <h2 className="ml-2 text-2xl text-black">{path}</h2>

@@ -16,38 +16,40 @@ export default function Profile() {
   const [age, setAge] = useState(0);
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [majors, setMajors] = useState([]);
-  const [minors, setMinors] = useState([]);
-  const [classes, setClasses] = useState([]);
+  const [majors, setMajors] = useState("");
+  const [minors, setMinors] = useState("");
+  const [classes, setClasses] = useState("");
 
   useEffect(() => {
-    if (user !== undefined) {
-      fetch("http://localhost:3000/api/getMatches", {
-        method: "POST",
-        body: JSON.stringify({
-          username: user?.email,
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok"); // TODO: Handle this error
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setMatches(data.toString());
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+    if (user) {
+      console.log('email', user.email)
+      // fetch("http://localhost:3000/api/getMatches", {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     username: user?.email,
+      //   }),
+      //   headers: {
+      //     "Content-type": "application/json",
+      //   },
+      // })
+      //   .then((response) => {
+      //     if (!response.ok) {
+      //       throw new Error("Network response was not ok"); // TODO: Handle this error
+      //     }
+      //     return response.json();
+      //   })
+      //   .then((data) => {
+      //     setMatches(data.toString());
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error:", error);
+      //   });
 
-      fetch("http://localhost:3000/api/getProfile", {
+      
+        fetch("/api/getUserInfo", {
         method: "POST",
         body: JSON.stringify({
-          username: user?.email,
+          username: user.email as string,
         }),
         headers: {
           "Content-type": "application/json",
@@ -55,14 +57,19 @@ export default function Profile() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setFirstName(data[0].firstName);
-          setLastName(data[0].lastName);
-          setAge(data[0].age);
-          setEmail(data[0].email);
-          setPhoneNumber(data[0].phoneNumber);
-          setMajors(data[0].majors);
-          setMinors(data[0].minors);
-          setClasses(data[0].classes);
+          if (data) {
+            setFirstName(data.basicInfo.firstName);
+            setLastName(data.basicInfo.lastName);
+            setAge(data.basicInfo.age);
+            setEmail(data.contactInfo.email);
+            setPhoneNumber(data.contactInfo.phoneNumber);
+            setMajors(data.academicInfo.majors);
+            setMinors(data.academicInfo.minors);
+            setClasses(data.academicInfo.classes);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
         });
     }
   }, [user]);
