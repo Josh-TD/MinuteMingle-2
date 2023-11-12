@@ -6,6 +6,8 @@ import RightArrow from "./components/RightArrow";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { maleImages, femaleImages } from "../data/imagePaths";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import FilterDropdown from "../pages/components/FilterDropdown";
 
 type ConnectionStatus = {
   isConnected: boolean;
@@ -42,6 +44,7 @@ export default function Home({
   const [person, setPerson] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [picture, setPicture] = useState<string>("/images/happy_guy.jpg");
+  const { user, error, isLoading } = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,6 +62,22 @@ export default function Home({
     };
     fetchData();
   }, []);
+
+  let sendMatch = () => {
+    fetch("http://localhost:3000/api/addMatch", {
+      method: "POST",
+      body: JSON.stringify({
+        sender: user?.email,
+        receiver:person.contactInfo.email,
+        senderInfo:"stuff",
+        receiverInfo:"stuff"
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+    alert("You sent a match")
+  }
 
   return (
     <div className="relative w-full h-full">
@@ -97,27 +116,14 @@ export default function Home({
               Courses: {person && person.academicInfo.classes}
             </p>
           </div>
-          <button className="absolute top-[25px] left-12">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-10 h-10"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
-              />
-            </svg>
-          </button>
-
+          <div className = "absolute top-[25px] left-12">
+            <FilterDropdown />
+          </div>
           <div className="flex mb-4 justify-center">
             <a
               href="#"
               className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-center text-black bg-gray-200 rounded-lg hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-400 dark:text-white dark:bg-black dark:hover:bg-gray-500 dark:focus:ring-gray-600"
+              onClick={sendMatch}
             >
               Become Study Buddies with {person && person.basicInfo.firstName}!
             </a>

@@ -8,6 +8,7 @@ export default function profileForm() {
           <MyForm />
         </div>
       </a>
+      <a href="http://localhost:3000/home" className="block mx-auto pt-10 max-w-sm p-6 bg-gray-100 border border-gray-200 rounded-lg shadow">Click to skip</a>
     </div>
   );
 }

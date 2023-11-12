@@ -154,7 +154,7 @@ const MyForm = () => {
         });
 
         const data = await response.json();
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "http://localhost:3000/home";
 
         if (data.success) {
           console.log("Form submitted successfully");
@@ -170,30 +170,30 @@ const MyForm = () => {
     }
   };
 
-  const [matches, setMatches] = useState(null);
-  const { user, error, isLoading } = useUser();
-  useEffect(()=>{{
-    fetch(
-      "http://localhost:3000/api/getUserInfo", {
-          method: "POST",
-          body: JSON.stringify({
-              "username" : "lmdevine@umass.edu",
-          }),
-          headers: {
-            "Content-type": "application/json"
-          }
-      }
-  ).then((response) => 
-    response.json())
-  .then((data)=>{
-    console.log(data)
-    setMatches(data)
-  })
-  }})
-  console.log(matches)
-  if(matches != null){
-    window.location.href = "http://localhost:3000/home"
-  }
+  // const [matches, setMatches] = useState(null);
+  // const { user, error, isLoading } = useUser();
+  // useEffect(()=>{{
+  //   fetch(
+  //     "http://localhost:3000/api/getUserInfo", {
+  //         method: "POST",
+  //         body: JSON.stringify({
+  //             "username" : "lmdevine@umass.edu",
+  //         }),
+  //         headers: {
+  //           "Content-type": "application/json"
+  //         }
+  //     }
+  // ).then((response) => 
+  //   response.json())
+  // .then((data)=>{
+  //   console.log(data)
+  //   setMatches(data)
+  // })
+  // }})
+  // console.log(matches)
+  // if(matches != null){
+  //   window.location.href = "http://localhost:3000/home"
+  // }
 
   return (
     <form onSubmit={handleSubmit}>

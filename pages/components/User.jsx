@@ -36,9 +36,9 @@ export default function User({ user }) {
           sideOffset={5}
         >
           <div className="flex flex-col gap-2.5">
-            <p className="text-white text-[15px] leading-[19px] font-medium mb-2.5">
-              {user ? user.name : "No user"}
-            </p>
+            <a href="/profile" className="text-white text-[15px] leading-[19px] font-medium mb-2.5">
+              {user ? "Your Profile" : "No user"}
+            </a>
             {user ? (
               <a href='/profile' className="text-white text-[14px] leading-[19px] font-medium mb-2.5">
                 Profile
