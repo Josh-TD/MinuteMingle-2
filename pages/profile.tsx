@@ -6,6 +6,7 @@ import AcademicInformation from "./components/academic";
 import ScrollAreaItem from "./components/scroll";
 import React, { useState, useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import LocationInformation from "./components/location";
 
 export default function Profile() {
   const { user, error, isLoading } = useUser();
@@ -16,13 +17,15 @@ export default function Profile() {
   const [age, setAge] = useState(0);
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [isOnCampus, setIsOnCampus] = useState(false);
+  const [residentialArea, setResidentialArea] = useState("");
   const [majors, setMajors] = useState("");
   const [minors, setMinors] = useState("");
   const [classes, setClasses] = useState("");
 
   useEffect(() => {
     if (user) {
-      console.log('email', user.email)
+      console.log("email", user.email);
       // fetch("http://localhost:3000/api/getMatches", {
       //   method: "POST",
       //   body: JSON.stringify({
@@ -45,8 +48,7 @@ export default function Profile() {
       //     console.error("Error:", error);
       //   });
 
-      
-        fetch("/api/getUserInfo", {
+      fetch("/api/getUserInfo", {
         method: "POST",
         body: JSON.stringify({
           username: user.email as string,
@@ -63,6 +65,8 @@ export default function Profile() {
             setAge(data.basicInfo.age);
             setEmail(data.contactInfo.email);
             setPhoneNumber(data.contactInfo.phoneNumber);
+            setIsOnCampus(data.locationInfo.isOnCampus);
+            setResidentialArea(data.locationInfo.residentialArea);
             setMajors(data.academicInfo.majors);
             setMinors(data.academicInfo.minors);
             setClasses(data.academicInfo.classes);
@@ -73,6 +77,32 @@ export default function Profile() {
         });
     }
   }, [user]);
+
+  const printResidentialArea = () => {
+    if (!isOnCampus) {
+      return "Off campus";
+    }
+    else {
+      if (residentialArea == "central") {
+        return "Central";
+      }
+      else if (residentialArea == "northeast") {
+        return "Northeast";
+      }
+      else if (residentialArea == "southwest") {
+        return "Southwest";
+      }
+      else if (residentialArea == "north") {
+        return "North";
+      }
+      else if (residentialArea == "orchard hill") {
+        return "Orchard Hill";
+      }
+      else {
+        return "Off campus";
+      }
+    }
+  }
 
   return (
     <main className="p-8 bg-gray-100">
@@ -98,14 +128,13 @@ export default function Profile() {
           </h2>
         </div>
         <div className="col-span-2">
-          <Image
-            src={"/images/honors.jpg"}
-            alt="Residential Area"
-            width={800}
-            height={800}
-            priority={true}
-            className="shadow-lg rounded-lg shadow-gray-400"
-          />
+          <div className="flex flex-col">
+            <LocationInformation
+              isOnCampus={isOnCampus}
+              residentialArea={residentialArea}
+            />
+            <p className="text-black">{firstName}'s residential area: {printResidentialArea()}</p>
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-3">
