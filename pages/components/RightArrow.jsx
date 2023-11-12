@@ -23,7 +23,7 @@ export default function RightArrow({ person, setPerson, setPicture }) {
     console.log(person.basicInfo.gender);
   };
   return (
-    <button onClick={() => swipe()}>
+    <button id="RightArrow" onClick={() => swipe()}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
