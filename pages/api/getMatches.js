@@ -8,7 +8,11 @@ export default async (req, res) => {
        const currentMatches= await db
            .collection("studyBuddies")
            .findOne({user: info.username},)
-        res.json(currentMatches.matches);
+        if (currentMatches == null){
+            res.json([])
+        }else{
+            res.json(currentMatches.matches);
+        }
    } catch (e) {
        console.error(e);
        res.status(400).end();

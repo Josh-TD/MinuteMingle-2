@@ -11,7 +11,7 @@ import LocationInformation from "./components/location";
 export default function Profile() {
   const { user, error, isLoading } = useUser();
 
-  const [matches, setMatches] = useState(null);
+  const [matches, setMatches] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
@@ -25,30 +25,30 @@ export default function Profile() {
 
   useEffect(() => {
     if (user) {
-      console.log("email", user.email);
-      // fetch("http://localhost:3000/api/getMatches", {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     username: user?.email,
-      //   }),
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      // })
-      //   .then((response) => {
-      //     if (!response.ok) {
-      //       throw new Error("Network response was not ok"); // TODO: Handle this error
-      //     }
-      //     return response.json();
-      //   })
-      //   .then((data) => {
-      //     setMatches(data.toString());
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error:", error);
-      //   });
-
-      fetch("/api/getUserInfo", {
+      console.log('email', user.email)
+      fetch("http://localhost:3000/api/getMatches", {
+        method: "POST",
+        body: JSON.stringify({
+          username: user?.email,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok"); // TODO: Handle this error
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setMatches(data.toString());
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      
+        fetch("/api/getUserInfo", {
         method: "POST",
         body: JSON.stringify({
           username: user.email as string,
