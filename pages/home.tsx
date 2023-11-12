@@ -43,7 +43,7 @@ export default function Home({
   const [person, setPerson] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [picture, setPicture] = useState<string>("/images/happy_guy.jpg");
-  const { user } = useUser();
+  const { user, error, isLoading } = useUser();
 
   console.log(user)
 
@@ -68,11 +68,10 @@ export default function Home({
     fetch("http://localhost:3000/api/addMatch", {
       method: "POST",
       body: JSON.stringify({
-        sender: "jocelynBot",
+        sender: "jocelynbot",
         receiver:person.contactInfo.email,
         senderInfo:"stuff",
         receiverInfo:"stuff"
-
       }),
       headers: {
         "Content-type": "application/json",
