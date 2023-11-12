@@ -40,11 +40,6 @@ export default function User({ user }) {
               {user ? "Your Profile" : "No user"}
             </a>
             {user ? (
-              <a href='/profile' className="text-white text-[14px] leading-[19px] font-medium mb-2.5">
-                Profile
-              </a>
-            ) : null}
-            {user ? (
               <a
                 href="/api/auth/logout"
                 className="text-white text-[15px] leading-[19px] font-medium hover:underline"
